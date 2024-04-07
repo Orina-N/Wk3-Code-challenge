@@ -1,8 +1,9 @@
 // Your code here
 document.addEventListener("DOMContentLoaded", async(event) => {
     const films = await movieList()
+    const poster = await movieList()
    displayMovies(films)
-   viewMovie(films)
+   viewMovie(poster)
 })
 
 
@@ -23,14 +24,25 @@ function displayMovies (films) {
 }
 
 
- function viewMovie (films) {
+ function viewMovie (poster) {
+    const imageCarrier = document.querySelector("#image-carrier")
+    const div = document.createElement("div")
+    //console.log(imageCarrier);
+
+
     const view = document.querySelectorAll(".movie")
     view.forEach(show => {
-        show.addEventListener("click", () => {
-            //   console.log(event.target.id)
-            
+        show.addEventListener("click", (event) => {
+            // console.log(event.target.id)
+            const viewPoster = poster.find((element)=> element.id === event.target.id)
+            div.innerHTML = `
+             <img src="${viewPoster.poster}"/>
+            `
+            imageCarrier.appendChild(div)
         })
+    
     })
+
  }
 
 
