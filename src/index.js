@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", async(event) => {
     const poster = await movieList()
    displayMovies(films)
    viewMovie(poster)
+   displayMovieDetails(films)
+   otherDetails(films)
 })
 
 
@@ -36,7 +38,7 @@ function displayMovies (films) {
             // console.log(event.target.id)
             const viewPoster = poster.find((element)=> element.id === event.target.id)
             div.innerHTML = `
-             <img src="${viewPoster.poster}"/>
+             <img class="posters" src="${viewPoster.poster}" alt="Movie poster"/>
             `
             imageCarrier.appendChild(div)
         })
@@ -44,6 +46,42 @@ function displayMovies (films) {
     })
 
  }
+
+
+ function displayMovieDetails (films) {
+    const details = document.querySelector("#showing")
+    const carrier = document.createElement("div")
+
+
+    const view = document.querySelectorAll(".movie")
+    view.forEach(show => {
+    show.addEventListener("click", (event)=> {
+       // console.log(event.target.id);
+       const viewDetails = films.find((element) => element.id === event.target.id)
+       carrier.innerHTML = `
+       <div class="card">
+       <div id="title" class="title">${viewDetails.title}</div>
+       <div id="runtime" class="meta">${viewDetails.runtime} minutes</div>
+       <div class="content" id="details">
+         <div class="description">
+           <div id="film-info">${viewDetails.description}</div>
+           <span id="showtime" class="ui label">${viewDetails.showtime}</span>
+           <span id="ticket-num">[X]</span> 
+         </div>
+       </div>
+       <div class="extra content">
+         <button id="buy-ticket" class="ui orange button">
+           Buy Ticket
+         </button>
+       </div>
+     </div>       
+       
+       `
+       details.appendChild(carrier)
+    })
+   })
+ }
+ 
 
 
 
