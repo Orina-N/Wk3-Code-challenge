@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async(event) => {
  displayMovies(films)
  viewMovie(poster)
  displayMovieDetails(films)
- otherDetails(films)
+ deleteButton(films)
 })
 
 
@@ -13,10 +13,11 @@ document.addEventListener("DOMContentLoaded", async(event) => {
 function displayMovies (films) {
 const film = films.map(movie => {
       return `
-      <li>
+      <li class="li">
         <div class="movie" id="${movie.id}">
           ${movie.title}
         </div>
+        <button id="${movie.id}1" class="moviedelete">Delete</button>
       </li>
       `
   })
@@ -25,6 +26,22 @@ const film = films.map(movie => {
   ul.innerHTML = film
 }
 
+function deleteButton (films) {
+  const details = document.querySelector("#showing")
+  const imageCarrier = document.querySelector("#image-carrier")
+  const listCarrier = document.querySelector(".li")
+  console.log(listCarrier);
+
+  const deleteBtn = document.querySelectorAll(".moviedelete")
+  deleteBtn.forEach(btn => {
+    btn.addEventListener("click", (event) => {
+       const deleteMovie = films.find((element)=> element.id === event.target.id)
+       details.innerHTML = ""
+       imageCarrier.innerHTML = ""
+       listCarrier.innerHTML = ""
+    })
+  })
+}
 
 function viewMovie (poster) {
   const imageCarrier = document.querySelector("#image-carrier")
@@ -82,6 +99,9 @@ function displayMovieDetails (films) {
  })
 }
 
+function buyTicket () {
+
+}
 
 
 
